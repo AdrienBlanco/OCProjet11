@@ -1,14 +1,16 @@
-export default function SignIn() {	
-	document.title = "Argent Bank - Sign In"
+import LoginForm from '../../components/LoginForm/LoginForm';
 
-	return (
+export default function SignIn() {
+    document.title = "Argent Bank - Sign In"
 
-			<section className="sign-in-content">
-				<i className="fa fa-user-circle sign-in-icon"></i>
-				<h1>Sign In</h1>
-				
-			</section>
+    return (
 
-
-	)
+        <main className="main bg-dark">
+            <section className="sign-in-content">
+                <i className="fa fa-user-circle sign-in-icon"></i>
+                <h1>Sign In</h1>
+                <LoginForm />
+            </section>
+        </main>
+    )
 }
