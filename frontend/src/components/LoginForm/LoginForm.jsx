@@ -33,7 +33,7 @@ export default function LoginForm() {
         setCheckBox(e.target.checked);
     };
 
-    const handleLogin = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (email.trim() === "" || password.trim() === "") {
@@ -58,7 +58,7 @@ export default function LoginForm() {
     };
 
     return (
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSubmit}>
             <div className="input-wrapper">
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
