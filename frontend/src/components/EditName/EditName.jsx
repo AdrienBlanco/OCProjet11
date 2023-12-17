@@ -34,8 +34,6 @@ export default function EditName() {
         setNewUserName(newValue)
     }
 
-    console.log(newUserName)
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
