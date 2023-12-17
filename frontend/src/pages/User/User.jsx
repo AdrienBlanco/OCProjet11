@@ -1,4 +1,5 @@
 import Account from "../../components/Account/Account";
+import EditName from "../../components/EditName/EditName";
 
 export default function User() {
     document.title = "Argent Bank - User"
@@ -25,8 +26,7 @@ export default function User() {
         <main className="main bg-dark">
 
             <div className="header">
-                <h1>Welcome back<br />Tony Jarvis!</h1>
-                <button className="edit-button">Edit Name</button>
+                <EditName />
             </div>
             <h2 className="sr-only">Accounts</h2>
             {accountData.map(({ title, amount, amountDescription }) => (
