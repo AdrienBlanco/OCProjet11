@@ -32,8 +32,10 @@ export const fetchUserProfile = async (token) => {
                 "Authorization": `Bearer ${token}`
             }
         });
+
         const data = await response.json();
         return data;
+
     } catch (err) {
         console.log(err);
     }
@@ -50,11 +52,13 @@ export const updateUserName = async (token, newUserName) => {
             },
             body: JSON.stringify({ userName: newUserName }),
         });
+        
         if (response.ok) {
             return true;
         } else {
             return false;
         }
+
     } catch (err) {
         console.error("Updating failed", err);
         alert("Internal server error, please try again")
