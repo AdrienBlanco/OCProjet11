@@ -54,7 +54,8 @@ export default function EditName() {
                 setOpenEdit(!OpenEdit)
             }
         } catch (err) {
-            console.log(err)
+            console.error("Updating failed", err)
+            alert("Internal server error, please try again")
         }
     }
 

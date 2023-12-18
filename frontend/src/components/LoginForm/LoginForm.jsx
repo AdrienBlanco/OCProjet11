@@ -47,6 +47,13 @@ export default function LoginForm() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password })
             })
+
+            if (response.status === 400) {
+                alert("Bad request: Incorrect email or password");
+            } if (response.status === 500) {
+                alert("Internal server error: Please try again");
+            }
+
             const loginData = await response.json()
             const token = loginData.body.token
 
@@ -54,8 +61,7 @@ export default function LoginForm() {
             navigate("/user")
 
         } catch (err) {
-            alert("Bad request: Incorrect email or password");
-            console.log(err);            
+            console.error(err);
         };
     };
 
