@@ -38,7 +38,7 @@ export default function LoginForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (email.trim() === "" || password.trim() === "") {
+        if (!email || !password) {
             alert("Thank you to fill in all fields");
             return;
         } try {
@@ -54,8 +54,8 @@ export default function LoginForm() {
             navigate("/user")
 
         } catch (err) {
-            alert("User not found, incorrect email or password");
-            console.log(err);
+            alert("Bad request: Incorrect email or password");
+            console.log(err);            
         };
     };
 
