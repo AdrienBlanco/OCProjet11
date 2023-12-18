@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { setLogIn } from "../../redux/reducers/authSlice"
+import InputWrapper from "../InputWrapper/InputWrapper"
 
 
 export default function LoginForm() {
@@ -11,7 +12,7 @@ export default function LoginForm() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [checkBox, setCheckBox] = useState(false); 
+    const [checkBox, setCheckBox] = useState(false);
 
     useEffect(() => {
         const storedEmail = localStorage.getItem("rememberedEmail");
@@ -59,14 +60,21 @@ export default function LoginForm() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="input-wrapper">
-                <label htmlFor="username">Username</label>
-                <input type="text" id="username" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            </div>
-            <div className="input-wrapper">
-                <label htmlFor="password">Password</label>
-                <input type="password" id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} />
-            </div>
+            <InputWrapper
+                id="username"
+                label="Username"
+                type="text"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+            <InputWrapper
+                id="password"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+                onChange={(e) => setPassword(e.target.value)}
+            />
             <div className="input-remember">
                 <input type="checkbox" id="remember-me" checked={checkBox} onChange={handleCheckBox} />
                 <label htmlFor="remember-me">Remember me</label>

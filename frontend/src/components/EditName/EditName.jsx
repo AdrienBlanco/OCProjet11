@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { setGetUser, setEditUserName } from "../../redux/reducers/userSlice"
+import InputWrapper from "../InputWrapper/InputWrapper"
 
 export default function EditName() {
 
@@ -29,11 +30,6 @@ export default function EditName() {
         fetchUserData()
     }, [dispatch, token, user])
 
-    const handleChange = (e) => {
-        const newValue = e.target.value
-        setNewUserName(newValue)
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -61,18 +57,27 @@ export default function EditName() {
                 <div className="sign-in-content">
                     <h1 className="color-grey">Edit user info</h1>
                     <form onSubmit={handleSubmit}>
-                        <div className="input-wrapper">
-                            <label htmlFor="userName">User Name:</label>
-                            <input type="text" id="userName" name="userName" placeholder={user.userName} onChange={handleChange} />
-                        </div>
-                        <div className="input-wrapper">
-                            <label htmlFor="firstName">First Name:</label>
-                            <input type="text" id="firstName" name="firstName" value={user.firstName} disabled />
-                        </div>
-                        <div className="input-wrapper">
-                            <label htmlFor="lastName">Last Name:</label>
-                            <input type="text" id="lastName" name="lastName" value={user.lastName} disabled />
-                        </div>
+                        <InputWrapper
+                            id="userName"
+                            label="User Name:"
+                            type="text"
+                            placeholder={user.userName}
+                            onChange={(e) => setNewUserName(e.target.value)}
+                        />
+                        <InputWrapper
+                            id="firstName"
+                            label="First Name:"
+                            type="text"
+                            value={user.firstName}
+                            disabled={true}
+                        />
+                        <InputWrapper
+                            id="lastName"
+                            label="Last Name:"
+                            type="text"
+                            value={user.lastName}
+                            disabled={true}
+                        />
                         <button className="edit-button" type="submit">Save</button>
                         <button className="edit-button" type="button" onClick={() => setOpenEdit(!OpenEdit)}>Cancel</button>
                     </form>
