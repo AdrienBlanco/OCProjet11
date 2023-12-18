@@ -1,7 +1,7 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import ArgentBankLogo from "../../img/argentBankLogo.png"
-import { setLogOut } from "../../redux/reducers/authSlice"
+import ArgentBankLogo from "../../img/argentBankLogo.png";
+import { setLogOut } from "../../redux/reducers/authSlice";
 
 export default function Header() {
 
@@ -9,7 +9,7 @@ export default function Header() {
     const dispatch = useDispatch();
 
     const token = useSelector((state) => state.auth.token);
-    const userName = useSelector((state) => state.user.userName)
+    const userName = useSelector((state) => state.user.userName);
 
 
     const handleLogout = () => {
@@ -37,5 +37,5 @@ export default function Header() {
                 )}
             </nav>
         </header>
-    );
-}
+    )
+};

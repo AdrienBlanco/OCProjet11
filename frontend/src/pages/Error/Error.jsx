@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export default function Error() {
     document.title = "Argent Bank - Page not Found"
@@ -12,4 +12,4 @@ export default function Error() {
             </section>
         </main>
     )
-}
+};

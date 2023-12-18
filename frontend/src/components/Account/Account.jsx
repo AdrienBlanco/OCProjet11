@@ -13,4 +13,4 @@ export default function Account({ title, amount, amountDescription }) {
             </div>
         </section>
     )
-}
+};

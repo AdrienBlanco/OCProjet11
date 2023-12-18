@@ -20,7 +20,7 @@ export default function User() {
             amount: "$184.30",
             amountDescription: "Current Balance",
         },
-    ]
+    ];
 
     return (
         <main className="main bg-dark">
@@ -37,4 +37,4 @@ export default function User() {
             ))}
         </main>
     )
-}
+};

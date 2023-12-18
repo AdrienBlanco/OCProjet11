@@ -5,4 +5,4 @@ export default function InputWrapper({ label, type, id, autoComplete, onChange, 
             <input type={type} id={id} autoComplete={autoComplete} onChange={onChange} value={value} placeholder={placeholder} disabled={disabled}/>
         </div>
     )
-}
+};

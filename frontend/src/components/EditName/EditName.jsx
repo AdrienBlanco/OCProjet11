@@ -1,17 +1,17 @@
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
-import { setGetUser, setEditUserName } from "../../redux/reducers/userSlice"
-import InputWrapper from "../InputWrapper/InputWrapper"
-import Button from "../Button/Button"
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { setGetUser, setEditUserName } from "../../redux/reducers/userSlice";
+import InputWrapper from "../InputWrapper/InputWrapper";
+import Button from "../Button/Button";
 
 export default function EditName() {
 
-    const user = useSelector((state) => state.user)
-    const token = useSelector((state) => state.auth.token)
-    const dispatch = useDispatch()
+    const user = useSelector((state) => state.user);
+    const token = useSelector((state) => state.auth.token);
+    const dispatch = useDispatch();
 
     const [OpenEdit, setOpenEdit] = useState(false);
-    const [newUserName, setNewUserName] = useState(user.userName)
+    const [newUserName, setNewUserName] = useState(user.userName);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -21,20 +21,20 @@ export default function EditName() {
                     headers: {
                         "Authorization": `Bearer ${token}`
                     }
-                })
-                const data = await response.json()
-                dispatch(setGetUser({ userProfile: data }))
+                });
+                const data = await response.json();
+                dispatch(setGetUser({ userProfile: data }));
             } catch (err) {
                 console.log(err)
             }
         }
-        fetchUserData()
+        fetchUserData();
     }, [dispatch, token, user])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const userNameField = document.querySelector('input#userName')
+        const userNameField = document.querySelector('input#userName');
 
         if (!userNameField.value) {
             alert("Please fill in a new user name before saving");
@@ -48,7 +48,7 @@ export default function EditName() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({ userName: newUserName }),
-            })
+            });
             if (response.ok) {
                 dispatch(setEditUserName(newUserName))
                 setOpenEdit(!OpenEdit)
@@ -57,7 +57,7 @@ export default function EditName() {
             console.error("Updating failed", err)
             alert("Internal server error, please try again")
         }
-    }
+    };
 
     return (
         <div>
@@ -112,4 +112,4 @@ export default function EditName() {
             )}
         </div>
     )
-}
+};

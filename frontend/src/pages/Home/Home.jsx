@@ -1,8 +1,8 @@
-import IconChat from "../../img/icon-chat.png"
-import IconMoney from "../../img/icon-money.png"
-import IconSecurity from "../../img/icon-security.png"
-import Hero from "../../components/Hero/Hero"
-import FeatureItem from "../../components/FeatureItem/FeatureItem"
+import IconChat from "../../img/icon-chat.png";
+import IconMoney from "../../img/icon-money.png";
+import IconSecurity from "../../img/icon-security.png";
+import Hero from "../../components/Hero/Hero";
+import FeatureItem from "../../components/FeatureItem/FeatureItem";
 
 export default function Home() {
     document.title = "Argent Bank - Home Page"
@@ -26,7 +26,7 @@ export default function Home() {
             title: "Security you can trust",
             text: "We use top of the line encryption to make sure your data and money is always safe.",
         },
-    ]
+    ];
 
     return (
         <main>
@@ -45,4 +45,4 @@ export default function Home() {
             </section>
         </main>
     )
-}
+};

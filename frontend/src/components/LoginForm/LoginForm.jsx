@@ -54,8 +54,8 @@ export default function LoginForm() {
                 alert("Internal server error: Please try again");
             }
 
-            const loginData = await response.json()
-            const token = loginData.body.token
+            const loginData = await response.json();
+            const token = loginData.body.token;
 
             dispatch(setLogIn({ token }))
             navigate("/user")
@@ -93,4 +93,4 @@ export default function LoginForm() {
             />
         </form>
     )
-}
+};

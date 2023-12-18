@@ -6,4 +6,4 @@ export default function FeatureItem({src, alt, title, text}) {
             <p>{text}</p>
         </div>
     )
-}
+};

@@ -16,7 +16,7 @@ function App() {
         <Route path="/user" element={token ? <User /> : <Navigate to="/sign-in" />} />
         <Route path="*" element={<Error />} />
       </Routes>
-  );
-}
+  )
+};
 
 export default App;
