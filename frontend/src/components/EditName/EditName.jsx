@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { setGetUser, setEditUserName } from "../../redux/reducers/userSlice";
+import { fetchUserProfile, updateUserName } from "../../redux/api";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import Button from "../Button/Button";
 
@@ -13,24 +14,16 @@ export default function EditName() {
     const [OpenEdit, setOpenEdit] = useState(false);
     const [newUserName, setNewUserName] = useState(user.userName);
 
+    // Mise à jour du state global avec les données de l'utilisateur connecté
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-                    method: "POST",
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                });
-                const data = await response.json();
-                dispatch(setGetUser({ userProfile: data }));
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        fetchUserData();
-    }, [dispatch, token, user])
+        const userData = async () => {
+            const data = await fetchUserProfile(token);
+            dispatch(setGetUser({ userProfile: data }));
+        };
+        userData();
+    }, [dispatch, token, user]);
 
+    // Mise à jour du UserName dans le state global
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -40,22 +33,10 @@ export default function EditName() {
             alert("Please fill in a new user name before saving");
             return;
         }
-        try {
-            const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-                method: "PUT",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ userName: newUserName }),
-            });
-            if (response.ok) {
-                dispatch(setEditUserName(newUserName))
-                setOpenEdit(!OpenEdit)
-            }
-        } catch (err) {
-            console.error("Updating failed", err)
-            alert("Internal server error, please try again")
+        const success = await updateUserName(token, newUserName);
+        if (success) {
+            dispatch(setEditUserName(newUserName));
+            setOpenEdit(!OpenEdit);
         }
     };
 

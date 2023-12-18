@@ -1,9 +1,10 @@
-import { useNavigate } from "react-router-dom"
-import { useState, useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { setLogIn } from "../../redux/reducers/authSlice"
-import InputWrapper from "../InputWrapper/InputWrapper"
-import Button from "../Button/Button"
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setLogIn } from "../../redux/reducers/authSlice";
+import { loginUser } from "../../redux/api";
+import InputWrapper from "../InputWrapper/InputWrapper";
+import Button from "../Button/Button";
 
 
 export default function LoginForm() {
@@ -23,6 +24,7 @@ export default function LoginForm() {
         }
     }, []);
 
+    // Sauvegarde du champs email si la checkbox est cochée
     useEffect(() => {
         if (checkBox) {
             localStorage.setItem("rememberedEmail", email);
@@ -41,28 +43,16 @@ export default function LoginForm() {
         if (!email || !password) {
             alert("Thank you to fill in all fields");
             return;
-        } try {
-            const response = await fetch("http://localhost:3001/api/v1/user/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password })
-            })
+        }
 
-            if (response.status === 400) {
-                alert("Bad request: Incorrect email or password");
-            } if (response.status === 500) {
-                alert("Internal server error: Please try again");
-            }
+        const loginData = await loginUser(email, password);
 
-            const loginData = await response.json();
+        // Si la connexion est réussie, le token est enregistré dans le state global
+        if (loginData.status === 200) {
             const token = loginData.body.token;
-
             dispatch(setLogIn({ token }))
             navigate("/user")
-
-        } catch (err) {
-            console.error(err);
-        };
+        }
     };
 
     return (
