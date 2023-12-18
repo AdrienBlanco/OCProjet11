@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { setGetUser, setEditUserName } from "../../redux/reducers/userSlice"
 import InputWrapper from "../InputWrapper/InputWrapper"
+import Button from "../Button/Button"
 
 export default function EditName() {
 
@@ -33,6 +34,12 @@ export default function EditName() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const userNameField = document.querySelector('input#userName')
+
+        if (!userNameField.value) {
+            alert("Please fill in a new user name before saving");
+            return;
+        }
         try {
             const response = await fetch("http://localhost:3001/api/v1/user/profile", {
                 method: "PUT",
@@ -55,7 +62,7 @@ export default function EditName() {
         <div>
             {OpenEdit ? (
                 <div className="sign-in-content">
-                    <h1 className="color-grey">Edit user info</h1>
+                    <h1>Edit user info</h1>
                     <form onSubmit={handleSubmit}>
                         <InputWrapper
                             id="userName"
@@ -78,14 +85,28 @@ export default function EditName() {
                             value={user.lastName}
                             disabled={true}
                         />
-                        <button className="edit-button" type="submit">Save</button>
-                        <button className="edit-button" type="button" onClick={() => setOpenEdit(!OpenEdit)}>Cancel</button>
+                        <Button
+                            className="edit-button"
+                            type="submit"
+                            txt="Save"
+                        />
+                        <Button
+                            className="edit-button"
+                            type="button"
+                            onClick={() => setOpenEdit(!OpenEdit)}
+                            txt="Cancel"
+                        />
                     </form>
                 </div>
             ) : (
                 <div className="header">
                     <h1>Welcome back<br />{user.firstName + " " + user.userName + "!"}</h1>
-                    <button className="edit-button" onClick={() => setOpenEdit(!OpenEdit)}>Edit Name</button>
+                    <Button
+                        className="edit-button"
+                        type="button"
+                        onClick={() => setOpenEdit(!OpenEdit)}
+                        txt="Edit Name"
+                    />
                 </div>
             )}
         </div>

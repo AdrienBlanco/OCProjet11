@@ -25,9 +25,7 @@ export default function User() {
     return (
         <main className="main bg-dark">
 
-            <div className="header">
                 <EditName />
-            </div>
             <h2 className="sr-only">Accounts</h2>
             {accountData.map(({ title, amount, amountDescription }) => (
                 <Account

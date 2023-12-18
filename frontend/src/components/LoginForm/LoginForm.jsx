@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { setLogIn } from "../../redux/reducers/authSlice"
 import InputWrapper from "../InputWrapper/InputWrapper"
+import Button from "../Button/Button"
 
 
 export default function LoginForm() {
@@ -79,7 +80,11 @@ export default function LoginForm() {
                 <input type="checkbox" id="remember-me" checked={checkBox} onChange={handleCheckBox} />
                 <label htmlFor="remember-me">Remember me</label>
             </div>
-            <button className="sign-in-button" type="submit">Sign In</button>
+            <Button
+                className="sign-in-button"
+                type="submit"
+                txt="Sign In"
+            />
         </form>
     )
 }
