@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import ArgentBankLogo from "../../img/argentBankLogo.png";
+import ArgentBankLogo from "../../img/argentBankLogo.webp";
 import { setLogOut } from "../../redux/reducers/authSlice";
 
 export default function Header() {
