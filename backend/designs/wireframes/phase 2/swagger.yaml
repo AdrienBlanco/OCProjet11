@@ -1,0 +1,154 @@
+swagger: '2.0'
+info:
+  title: Bank Argent transactions API documentation
+  description: Contains all available API endpoints for transactions codebase
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1/
+schemes:
+  - http
+paths:
+  /accounts/{accountId}/transactions:
+    get:
+      security:
+        - Bearer: []
+      summary: Get Account Transactions
+      description: Retrieve a list of transactions for a specific account
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          type: integer
+          description: Account ID
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: List of transactions retrieved successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid Account ID
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+  /accounts/{accountId}/transactions/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      summary: Get a specific transaction
+      description: Retrieve a specific transaction
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          type: integer
+          description: Account ID
+        - in: path
+          name: transactionId
+          required: true
+          type: integer
+          description: Transaction ID
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction retrieved successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid Account ID or Transaction ID
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+    patch:
+      security:
+        - Bearer: []
+      summary: Update Transaction Category / Note
+      description: Update the category / note of a specific transaction
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          type: integer
+          description: Account ID
+        - in: path
+          name: transactionId
+          required: true
+          type: integer
+          description: Transaction ID
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionPayload'
+          description: Transaction Item
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction category / note updated successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Account ID or Transaction ID
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+    
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+      date:
+        type: string
+      description:
+        type: string
+      amount:
+        type: string
+      balance:
+        type: string
+      transaction_type:
+        type: string
+      category:
+        type: string
+      note:
+        type: string
+  TransactionPayload:
+    type: object
+    properties:
+      category:
+        type: string
+      note:
+        type: string
+    required:
+      - category
+      - note
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
+        properties:
+          id:
+            type: integer
+          category:
+            type: string
+          note:
+            type: string
+
