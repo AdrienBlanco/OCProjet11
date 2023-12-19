@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setLogIn } from "../../redux/reducers/authSlice";
-import { loginUser } from "../../redux/api";
+import { fetchUserLogin } from "../../redux/api";
 import InputWrapper from "../InputWrapper/InputWrapper";
 import Button from "../Button/Button";
 
@@ -45,7 +45,7 @@ export default function LoginForm() {
             return;
         }
 
-        const loginData = await loginUser(email, password);
+        const loginData = await fetchUserLogin(email, password);
 
         // Si la connexion est réussie, le token est enregistré dans le state global
         if (loginData.status === 200) {

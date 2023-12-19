@@ -1,7 +1,7 @@
 const apiUrl = "http://localhost:3001/api/v1/";
 
 // Requête pour l'authentification
-export const loginUser = async (email, password) => {
+export const fetchUserLogin = async (email, password) => {
     try {
         const response = await fetch(`${apiUrl}user/login`, {
             method: "POST",
