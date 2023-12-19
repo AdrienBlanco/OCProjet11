@@ -9,7 +9,7 @@ basePath: /api/v1/
 schemes:
   - http
 paths:
-  /accounts/{accountId}/transactions:
+  /user/accounts/{accountId}/transactions:
     get:
       security:
         - Bearer: []
@@ -34,7 +34,7 @@ paths:
           description: Unauthorized
         '500':
           description: Internal Server Error
-  /accounts/{accountId}/transactions/{transactionId}:
+  /user/accounts/{accountId}/transactions/{transactionId}:
     get:
       security:
         - Bearer: []
